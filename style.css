@@ -1,0 +1,27 @@
+body{
+  background-image: url(img/background.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-bottom: 30px;
+}
+
+img{
+  height: 400px;
+}
+
+h1{
+  font-size: 100px;
+}
+
+.card{
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.card-body{
+  background-color: beige;
+}
