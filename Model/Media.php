@@ -1,8 +1,8 @@
 <?php
 
 class Media {
-  public $name;
   public $file_name;
+  public $name;
   public $type = "image";
 
   public function __construct($_file_name, $_name)

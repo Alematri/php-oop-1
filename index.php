@@ -1,10 +1,15 @@
 <?php
 
-require_once __DIR__ . "/Model/Production.php";
-require_once __DIR__ . "/Model/Media.php";
-require_once __DIR__ . "/Model/Movie.php";
-require_once __DIR__ . "/Model/TvSerie.php";
-require_once __DIR__ . "/db/db.php";
+try{
+  require_once __DIR__ . "/Traits/Year.php";
+  require_once __DIR__ . "/Model/Production.php";
+  require_once __DIR__ . "/Model/Media.php";
+  require_once __DIR__ . "/Model/Movie.php";
+  require_once __DIR__ . "/Model/TvSerie.php";
+  require_once __DIR__ . "/db/db.php";
+}catch(Exception $e){
+  $error = $e->getMessage();
+}
 
 ?>
 
@@ -27,23 +32,34 @@ require_once __DIR__ . "/db/db.php";
 
   <h1 class="text-center mt-3">Pirates Films and TV Series</h1>
 
-  <div class="container mt-3 d-flex flex-wrap">
+  <?php if(isset($error)): ?>
 
-    <?php foreach($productions as $production): ?>
+    <div class="alert alert-danger container text-center" role="alert">
+      <?php echo $error ?>
+    </div>
+    
+  <?php else: ?>
 
-      <div class="card m-2" style="width: 18rem;">
-        <img src="img/<?php echo $production->image->file_name ?>" class="card-img-top" alt="<?php echo $production->image->name ?>">
-        <div class="card-body">
-          <h5 class="card-title"><?php echo $production->title ?></h5>
-          <span class="card-text"><?php echo get_class($production) ?> &#8226; </span>
-          <span class="card-text"><?php echo $production->genre ?></span>
-          <p class="card-text">Cast: <?php echo implode(" , ", $production->cast) ?></p>
+    <div class="container mt-3 d-flex flex-wrap">
+
+      <?php foreach($productions as $production): ?>
+
+        <div class="card m-2" style="width: 18rem;">
+          <img src="img/<?php echo $production->image->file_name ?>" class="card-img-top" alt="<?php echo $production->image->name ?>">
+          <div class="card-body">
+            <h5 class="card-title"><?php echo $production->title ?></h5>
+            <span class="card-text"><?php echo get_class($production) ?> &#8226; </span>
+            <span class="card-text"><?php echo $production->genre ?></span>
+            <p class="card-text">Anno: <?php echo $production->publication_year ?></p>
+            <p class="card-text">Cast: <?php echo implode(" , ", $production->cast) ?></p>
+          </div>
         </div>
-      </div>
 
-    <?php endforeach; ?>
+      <?php endforeach; ?>
 
-  </div>
+    </div>
+
+  <?php endif; ?>
 
 </body>
 </html>
