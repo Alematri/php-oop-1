@@ -11,7 +11,6 @@ class Production{
 
   public function __construct(string $_title, string $_genre, array $_cast, Media $_image = null, int $_publication_year){
 
-    // Controlla se il titolo è vuoto e genera un'eccezione se lo è.
     if (empty($_title)) {
         throw new Exception("NESSUN TITOLO!");
     } else {
@@ -20,7 +19,6 @@ class Production{
 
     $this->genre = $_genre;
 
-    // Controlla se il cast è vuoto e genera un'eccezione se lo è.
     if (empty($_cast)) {
         throw new Exception("NESSUN ATTORE!");
     } else {
